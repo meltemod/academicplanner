@@ -1,0 +1,116 @@
+---
+title: "Weekly Planner"
+author: "Meltem Odabas"
+date: "9/3/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(gt)
+library(tidyverse)
+library(glue)
+```
+
+## Dataset
+
+The dataset is a .csv file with the following columns:
+
+* __project:__ name of the project
+* __category:__ goal category: writing, coding, research, reading,   service, etc.
+* __task:__ write your task here. Make sure to divide your tasks into managable chunks! (for example: instead of 'write your research paper', say 'write methods section.'
+* __date:__ the approximate date on which you are planning to work on this task.
+* __due date:__ the due date for completing this task. Does not have to be a date onthe same week your task is going to be listed.
+* __progress:__ I use three options: 'not started', 'in progress', or 'complete'. If complete, I do not include that task on my weekly planner list.
+
+
+
+```{r, echo=FALSE}
+#Open dataset
+#df <- read_csv('2020_fall_tasklist_weekly.csv')
+
+#sample dataset
+df <- tibble(project=c('project1','project2','project3','project 4'),
+             category = c('writing','coding','service','service'),
+             task = c('write data collection section for my paper',
+                      'create descriptive statistics for the regression dataset',
+                      'review article X',
+                      'update your cv and upload to your website'),
+             date = c('2020-09-03', '2020-09-10','2020-09-03','2020-09-01'),
+             due_date = c('2020-10-01', NA, '2020-09-04',NA),
+             progress = c('not started','not started','in progress','complete')       #I use three options: 'not started', 'in progress',
+                                            #or 'complete'. If complete, I do not include that task on my weekly planner list.
+             )
+```
+
+```{r, echo=FALSE}
+df
+```
+
+## How to maintain your dataset and update your weekly calendar
+
+Add new tasks to your .csv file as you get new tasks to complete -- the dataset will be automatically ordered based oon the date column (not sue date column!)
+Change the status of your tasks as you go along. If the status is 'not started', the task is listed in black. Your tasks that are in progress will be listed in green. Your completed tasks will be automatically removed from your list. 
+
+Check 'weekly_planner.Rmd' file for the code.
+If you want to add more columns or change the table features, please take a look at the gt package documentation. 
+
+```{r pressure, echo=FALSE}
+
+df %>%
+  arrange(date,project)%>%
+  mutate(Monday=as.Date(cut(as.Date(date),"week"))) %>%
+  mutate(Sunday=as.Date(cut(as.Date(date)+7,"week"))-1) %>%
+  mutate(group = paste(format(Monday,'%d %B'),"-",format(Sunday,'%d %B'))) %>%
+  mutate(color = rep(1:2,nrow(df)+1)[1:nrow(df)]) %>%
+  select(-Monday,-Sunday) %>%
+  filter(progress!='complete') %>%
+  gt(groupname_col = 'group') %>%
+  tab_header(
+    title = md("My Weekly Planner"),
+    subtitle = md("Fall 2020")
+  ) %>%
+  tab_style(
+    style = list(
+      cell_text(color = "black")
+    ),
+    locations = cells_body(
+      rows = progress == 'not started')
+  ) %>%
+  tab_style(
+    style = list(
+      cell_fill(color = "wheat1")
+    ),
+    locations = cells_body(
+      rows = color == 1)
+  ) %>%
+  tab_style(
+    style = list(
+      cell_fill(color = "wheat2")
+    ),
+    locations = cells_body(
+      rows = color == 2)
+  ) %>%  
+  tab_style(
+    style = list(
+      cell_text(color = "green")
+    ),
+    locations = cells_body(
+      rows = progress == 'in progress')
+  ) %>%
+  tab_style(
+    style = list(
+      cell_text(weight = 'bold')
+    ),
+    locations = cells_body(
+      columns = vars(task))
+  )%>%
+  tab_options(
+    row_group.background.color = "firebrick",
+    heading.background.color = 'darkred',
+    column_labels.background.color='black'
+  )%>%
+  cols_hide(c('progress','date','color'))
+
+```
+
+
