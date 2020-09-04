@@ -192,7 +192,7 @@ summary {
 <li><strong>project:</strong> name of the project</li>
 <li><strong>task:</strong> write your task here. Make sure to divide your tasks into managable chunks! (for example: instead of 'write your research paper', say 'write methods section.'</li>
 <li><strong>date:</strong> the approximate date on which you are planning to work on this task.</li>
-<li><strong>due date:</strong> the due date for completing this task. Does not have to be a date onthe same week your task is going to be listed.</li>
+<li><strong>due date:</strong> the due date for completing this task. Does not have to be a date onthe same week your task is going to be listed. If the deadline is the same date with the day the .Rmd file is rendered, the listing will be colored in red (because, well, someone need to finish that task soon!)</li>
 <li><strong>progress:</strong> I use three options: 'not started', 'in progress', or 'complete'. The weekly planner automatically removes the task entry.</li>
 </ul>
 <pre><code>## # A tibble: 4 x 6
@@ -208,13 +208,14 @@ summary {
 <ul>
 <li>Add new tasks to your .csv file as you receive/get new tasks to complete. Do not worry about on which row the task is listed -- the dataset will be automatically ordered based on the 'date' column (not the 'due date' column!)</li>
 <li><p>Change the status of your tasks as you go along. If the status is 'not started', the task is listed in black. Your tasks that are in progress will be listed in green. Your completed tasks will be automatically removed from your list.</p></li>
-<li><p>Check 'weekly_planner.Rmd' file for the code. If you want to add as many columns as you want. If you want to change the table features, please take a look at the gt package documentation.</p></li>
+<li><p>You can find the full code at the end of the document. If you want to add as many columns as you want. If you want to change the table features, please take a look at the gt package documentation.</p></li>
 </ul>
+<p>Hope this template will boost your productivity (and will give you more time to do your hobbies and spend time quality time with your loved ones!)</p>
 <style>html {
   font-family: Times;
 }
 
-#ibwurdibfq .gt_table {
+#ttuqmuozap .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -239,7 +240,7 @@ summary {
   border-left-color: #D3D3D3;
 }
 
-#ibwurdibfq .gt_heading {
+#ttuqmuozap .gt_heading {
   background-color: darkred;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -251,7 +252,7 @@ summary {
   border-right-color: #D3D3D3;
 }
 
-#ibwurdibfq .gt_title {
+#ttuqmuozap .gt_title {
   color: #FFFFFF;
   font-size: 125%;
   font-weight: initial;
@@ -261,7 +262,7 @@ summary {
   border-bottom-width: 0;
 }
 
-#ibwurdibfq .gt_subtitle {
+#ttuqmuozap .gt_subtitle {
   color: #FFFFFF;
   font-size: 85%;
   font-weight: initial;
@@ -271,13 +272,13 @@ summary {
   border-top-width: 0;
 }
 
-#ibwurdibfq .gt_bottom_border {
+#ttuqmuozap .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ibwurdibfq .gt_col_headings {
+#ttuqmuozap .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -292,7 +293,7 @@ summary {
   border-right-color: #D3D3D3;
 }
 
-#ibwurdibfq .gt_col_heading {
+#ttuqmuozap .gt_col_heading {
   color: #FFFFFF;
   background-color: black;
   font-size: 100%;
@@ -312,7 +313,7 @@ summary {
   overflow-x: hidden;
 }
 
-#ibwurdibfq .gt_column_spanner_outer {
+#ttuqmuozap .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: black;
   font-size: 100%;
@@ -324,15 +325,15 @@ summary {
   padding-right: 4px;
 }
 
-#ibwurdibfq .gt_column_spanner_outer:first-child {
+#ttuqmuozap .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ibwurdibfq .gt_column_spanner_outer:last-child {
+#ttuqmuozap .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ibwurdibfq .gt_column_spanner {
+#ttuqmuozap .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -344,7 +345,7 @@ summary {
   width: 100%;
 }
 
-#ibwurdibfq .gt_group_heading {
+#ttuqmuozap .gt_group_heading {
   padding: 8px;
   color: #FFFFFF;
   background-color: firebrick;
@@ -366,7 +367,7 @@ summary {
   vertical-align: middle;
 }
 
-#ibwurdibfq .gt_empty_group_heading {
+#ttuqmuozap .gt_empty_group_heading {
   padding: 0.5px;
   color: #FFFFFF;
   background-color: firebrick;
@@ -381,15 +382,15 @@ summary {
   vertical-align: middle;
 }
 
-#ibwurdibfq .gt_from_md > :first-child {
+#ttuqmuozap .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ibwurdibfq .gt_from_md > :last-child {
+#ttuqmuozap .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ibwurdibfq .gt_row {
+#ttuqmuozap .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -408,7 +409,7 @@ summary {
   overflow-x: hidden;
 }
 
-#ibwurdibfq .gt_stub {
+#ttuqmuozap .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -420,7 +421,7 @@ summary {
   padding-left: 12px;
 }
 
-#ibwurdibfq .gt_summary_row {
+#ttuqmuozap .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -430,7 +431,7 @@ summary {
   padding-right: 5px;
 }
 
-#ibwurdibfq .gt_first_summary_row {
+#ttuqmuozap .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -440,7 +441,7 @@ summary {
   border-top-color: #D3D3D3;
 }
 
-#ibwurdibfq .gt_grand_summary_row {
+#ttuqmuozap .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -450,7 +451,7 @@ summary {
   padding-right: 5px;
 }
 
-#ibwurdibfq .gt_first_grand_summary_row {
+#ttuqmuozap .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -460,11 +461,11 @@ summary {
   border-top-color: #D3D3D3;
 }
 
-#ibwurdibfq .gt_striped {
+#ttuqmuozap .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ibwurdibfq .gt_table_body {
+#ttuqmuozap .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -473,7 +474,7 @@ summary {
   border-bottom-color: #D3D3D3;
 }
 
-#ibwurdibfq .gt_footnotes {
+#ttuqmuozap .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -487,13 +488,13 @@ summary {
   border-right-color: #D3D3D3;
 }
 
-#ibwurdibfq .gt_footnote {
+#ttuqmuozap .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#ibwurdibfq .gt_sourcenotes {
+#ttuqmuozap .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -507,46 +508,46 @@ summary {
   border-right-color: #D3D3D3;
 }
 
-#ibwurdibfq .gt_sourcenote {
+#ttuqmuozap .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#ibwurdibfq .gt_left {
+#ttuqmuozap .gt_left {
   text-align: left;
 }
 
-#ibwurdibfq .gt_center {
+#ttuqmuozap .gt_center {
   text-align: center;
 }
 
-#ibwurdibfq .gt_right {
+#ttuqmuozap .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ibwurdibfq .gt_font_normal {
+#ttuqmuozap .gt_font_normal {
   font-weight: normal;
 }
 
-#ibwurdibfq .gt_font_bold {
+#ttuqmuozap .gt_font_bold {
   font-weight: bold;
 }
 
-#ibwurdibfq .gt_font_italic {
+#ttuqmuozap .gt_font_italic {
   font-style: italic;
 }
 
-#ibwurdibfq .gt_super {
+#ttuqmuozap .gt_super {
   font-size: 65%;
 }
 
-#ibwurdibfq .gt_footnote_marks {
+#ttuqmuozap .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="ibwurdibfq" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<div id="ttuqmuozap" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
   <thead class="gt_header">
     <tr>
       <th colspan="5" class="gt_heading gt_title gt_font_normal" style>My Weekly Planner</th>
@@ -579,8 +580,8 @@ summary {
       <td class="gt_row gt_left" style="background-color: #96CDCD; color: green;">service</td>
       <td class="gt_row gt_left" style="background-color: #FFE7BA; color: green;">project3</td>
       <td class="gt_row gt_left" style="background-color: #FFE7BA; color: green; font-weight: bold;">review article X</td>
-      <td class="gt_row gt_left" style="background-color: #FFE7BA; color: green;">Sep 04 Friday</td>
-      <td class="gt_row gt_left" style="background-color: #FFE7BA; color: green;">Thursday</td>
+      <td class="gt_row gt_left" style="background-color: #FFE7BA; color: green;">Sep 07 Monday</td>
+      <td class="gt_row gt_left" style="background-color: #FFE7BA; color: green;">Friday</td>
     </tr>
     <tr class="gt_group_heading_row">
       <td colspan="5" class="gt_group_heading">07 September - 13 September</td>
@@ -596,7 +597,110 @@ summary {
   
   
 </table></div>
-<p>Hope this template will boost your productivity (and will give you more time to do your hobbies and spend time quality time with your loved ones!)</p>
+<pre class="r"><code>today &lt;- format(Sys.Date(),'%b %d %A')
+df %&gt;%
+  arrange(date,project)%&gt;%
+  mutate(Monday=as.Date(cut(as.Date(date),&quot;week&quot;))) %&gt;%
+  mutate(Sunday=as.Date(cut(as.Date(date)+7,&quot;week&quot;))-1) %&gt;%
+  mutate(group = paste(format(Monday,'%d %B'),&quot;-&quot;,format(Sunday,'%d %B'))) %&gt;%
+  mutate(finish_on = format(as.Date(date),'%A')) %&gt;%
+  mutate(due_date = format(as.Date(due_date),'%b %d %A')) %&gt;%
+  mutate(color = rep(1:2,nrow(df)+1)[1:nrow(df)]) %&gt;%
+  mutate(color_category = case_when(
+    category == 'coding' ~ 'coding',
+    category == 'writing' ~ 'writing',
+    category == 'reading' ~ 'reading',
+    TRUE ~ 'other'
+  )) %&gt;%
+  select(-Monday,-Sunday) %&gt;%
+  filter(progress!='complete') %&gt;%
+  gt(groupname_col = 'group') %&gt;%
+  tab_header(
+    title = md(&quot;My Weekly Planner&quot;),
+    subtitle = md(&quot;Fall 2020&quot;)
+  ) %&gt;%
+  tab_style(
+    style = list(
+      cell_text(color = &quot;black&quot;)
+    ),
+    locations = cells_body(
+      rows = progress == 'not started')
+  ) %&gt;%
+  tab_style(
+    style = list(
+      cell_fill(color = &quot;wheat1&quot;)
+    ),
+    locations = cells_body(
+      rows = color == 1)
+  ) %&gt;%
+  tab_style(
+    style = list(
+      cell_fill(color = &quot;wheat2&quot;)
+    ),
+    locations = cells_body(
+      rows = color == 2)
+  ) %&gt;%  
+    tab_style(
+    style = list(
+      cell_fill(color = &quot;mediumpurple&quot;)
+    ),
+    locations = cells_body(
+      columns = vars(category),
+      rows = color_category == 'coding')
+  ) %&gt;% 
+      tab_style(
+    style = list(
+      cell_fill(color = &quot;tomato2&quot;)
+    ),
+    locations = cells_body(
+      columns = vars(category),
+      rows = color_category == 'writing')
+  ) %&gt;% 
+        tab_style(
+    style = list(
+      cell_fill(color = &quot;chartreuse1&quot;)
+    ),
+    locations = cells_body(
+      columns = vars(category),
+      rows = color_category == 'reading')
+  ) %&gt;% 
+        tab_style(
+    style = list(
+      cell_fill(color = &quot;paleturquoise3&quot;)
+    ),
+    locations = cells_body(
+      columns = vars(category),
+      rows = color_category == 'other')
+  ) %&gt;% 
+  tab_style(
+    style = list(
+      cell_text(color = &quot;green&quot;)
+    ),
+    locations = cells_body(
+      rows = progress == 'in progress')
+  ) %&gt;%
+    tab_style(
+    style = list(
+      cell_text(color = &quot;red&quot;)
+    ),
+    locations = cells_body(
+      rows = due_date == today)
+  ) %&gt;%
+  tab_style(
+    style = list(
+      cell_text(weight = 'bold')
+    ),
+    locations = cells_body(
+      columns = vars(task))
+  )%&gt;%
+  tab_options(
+    row_group.background.color = &quot;firebrick&quot;,
+    heading.background.color = 'darkred',
+    column_labels.background.color='black',
+    table.font.names = 'Times',
+    table.font.size = 11
+  )%&gt;%
+  cols_hide(c('progress','color','date','color_category'))</code></pre>
 </div>
 
 

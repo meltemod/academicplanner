@@ -2,7 +2,9 @@
 title: "Weekly Planner"
 author: "Meltem Odabas"
 date: "9/3/2020"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -20,7 +22,7 @@ The dataset is a .csv file with the following columns:
 * __project:__ name of the project
 * __task:__ write your task here. Make sure to divide your tasks into managable chunks! (for example: instead of 'write your research paper', say 'write methods section.'
 * __date:__ the approximate date on which you are planning to work on this task.
-* __due date:__ the due date for completing this task. Does not have to be a date onthe same week your task is going to be listed.
+* __due date:__ the due date for completing this task. Does not have to be a date onthe same week your task is going to be listed. If the deadline is the same date with the day the .Rmd file is rendered, the listing will be colored in red (because, well, someone need to finish that task soon!)
 * __progress:__ I use three options: 'not started', 'in progress', or 'complete'. The weekly planner automatically removes the task entry.
 
 
@@ -36,8 +38,8 @@ df <- tibble(category = c('writing','coding','service','service'),
                       'create descriptive statistics for the regression dataset',
                       'review article X',
                       'update your cv and upload to your website'),
-             date = c('2020-09-03', '2020-09-10','2020-09-03','2020-09-01'),
-             due_date = c('2020-10-01', NA, '2020-09-04',NA),
+             date = c('2020-09-03', '2020-09-10','2020-09-04','2020-09-01'),
+             due_date = c('2020-10-01', NA, '2020-09-07',NA),
              progress = c('not started','not started','in progress','complete')       #I use three options: 'not started', 'in progress',
                                             #or 'complete'. If complete, I do not include that task on my weekly planner list.
              )
@@ -52,9 +54,11 @@ df
 * Add new tasks to your .csv file as you receive/get new tasks to complete. Do not worry about on which row the task is listed -- the dataset will be automatically ordered based on the 'date' column (not the 'due date' column!) 
 * Change the status of your tasks as you go along. If the status is 'not started', the task is listed in black. Your tasks that are in progress will be listed in green. Your completed tasks will be automatically removed from your list. 
 
-* Check 'weekly_planner.Rmd' file for the code. If you want to add as many columns as you want. If you want to change the table features, please take a look at the gt package documentation. 
+* You can find the full code at the end of the document. If you want to add as many columns as you want. If you want to change the table features, please take a look at the gt package documentation. 
 
-```{r pressure, echo=FALSE}
+Hope this template will boost your productivity (and will give you more time to do your hobbies and spend time quality time with your loved ones!)
+
+```{r, echo=FALSE}
 today <- format(Sys.Date(),'%b %d %A')
 df %>%
   arrange(date,project)%>%
@@ -161,4 +165,111 @@ df %>%
   cols_hide(c('progress','color','date','color_category'))
 ```
 
-Hope this template will boost your productivity (and will give you more time to do your hobbies and spend time quality time with your loved ones!)
+
+
+```{r, echo=T, results=F}
+today <- format(Sys.Date(),'%b %d %A')
+df %>%
+  arrange(date,project)%>%
+  mutate(Monday=as.Date(cut(as.Date(date),"week"))) %>%
+  mutate(Sunday=as.Date(cut(as.Date(date)+7,"week"))-1) %>%
+  mutate(group = paste(format(Monday,'%d %B'),"-",format(Sunday,'%d %B'))) %>%
+  mutate(finish_on = format(as.Date(date),'%A')) %>%
+  mutate(due_date = format(as.Date(due_date),'%b %d %A')) %>%
+  mutate(color = rep(1:2,nrow(df)+1)[1:nrow(df)]) %>%
+  mutate(color_category = case_when(
+    category == 'coding' ~ 'coding',
+    category == 'writing' ~ 'writing',
+    category == 'reading' ~ 'reading',
+    TRUE ~ 'other'
+  )) %>%
+  select(-Monday,-Sunday) %>%
+  filter(progress!='complete') %>%
+  gt(groupname_col = 'group') %>%
+  tab_header(
+    title = md("My Weekly Planner"),
+    subtitle = md("Fall 2020")
+  ) %>%
+  tab_style(
+    style = list(
+      cell_text(color = "black")
+    ),
+    locations = cells_body(
+      rows = progress == 'not started')
+  ) %>%
+  tab_style(
+    style = list(
+      cell_fill(color = "wheat1")
+    ),
+    locations = cells_body(
+      rows = color == 1)
+  ) %>%
+  tab_style(
+    style = list(
+      cell_fill(color = "wheat2")
+    ),
+    locations = cells_body(
+      rows = color == 2)
+  ) %>%  
+    tab_style(
+    style = list(
+      cell_fill(color = "mediumpurple")
+    ),
+    locations = cells_body(
+      columns = vars(category),
+      rows = color_category == 'coding')
+  ) %>% 
+      tab_style(
+    style = list(
+      cell_fill(color = "tomato2")
+    ),
+    locations = cells_body(
+      columns = vars(category),
+      rows = color_category == 'writing')
+  ) %>% 
+        tab_style(
+    style = list(
+      cell_fill(color = "chartreuse1")
+    ),
+    locations = cells_body(
+      columns = vars(category),
+      rows = color_category == 'reading')
+  ) %>% 
+        tab_style(
+    style = list(
+      cell_fill(color = "paleturquoise3")
+    ),
+    locations = cells_body(
+      columns = vars(category),
+      rows = color_category == 'other')
+  ) %>% 
+  tab_style(
+    style = list(
+      cell_text(color = "green")
+    ),
+    locations = cells_body(
+      rows = progress == 'in progress')
+  ) %>%
+    tab_style(
+    style = list(
+      cell_text(color = "red")
+    ),
+    locations = cells_body(
+      rows = due_date == today)
+  ) %>%
+  tab_style(
+    style = list(
+      cell_text(weight = 'bold')
+    ),
+    locations = cells_body(
+      columns = vars(task))
+  )%>%
+  tab_options(
+    row_group.background.color = "firebrick",
+    heading.background.color = 'darkred',
+    column_labels.background.color='black',
+    table.font.names = 'Times',
+    table.font.size = 11
+  )%>%
+  cols_hide(c('progress','color','date','color_category'))
+```
